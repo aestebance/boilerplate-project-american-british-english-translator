@@ -27,6 +27,7 @@ class Translator {
 
     translate(text, mode) {
         let newString = text;
+        newString = newString.charAt(0).toUpperCase() + newString.slice(1);
         let spanOpen = '<span class="highlight">';
         let spanClose = '</span>';
         if (mode === 'american-to-british') {
@@ -43,8 +44,15 @@ class Translator {
             });
         }
 
-        let regexTime = /(([0-9]|0[0-9]|1[0-9]|2[0-3])(:|\.)([0-5][0-9]))/g
-        let times = newString.match(regexTime);
+        let britishRegexTime = /(([0-9]|0[0-9]|1[0-9]|2[0-3])(\.)([0-5][0-9]))/g;
+        let americanRegexTime = /(([0-9]|0[0-9]|1[0-9]|2[0-3])(:)([0-5][0-9]))/g;
+        let times;
+        if (mode === 'american-to-british') {
+            times = newString.match(americanRegexTime);
+        }
+        else {
+            times = newString.match(britishRegexTime);
+        }
         if (times) {
             times.forEach((time) => {
                 if (mode === 'american-to-british') {
@@ -58,7 +66,7 @@ class Translator {
         if (text === newString) {
             return 'Everything looks good to me!';
         } else {
-            return newString.charAt(0).toUpperCase() + newString.slice(1);
+            return newString;
         }
     }
 }
