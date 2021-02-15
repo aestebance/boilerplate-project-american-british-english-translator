@@ -27,13 +27,15 @@ class Translator {
 
     translate(text, mode) {
         let newString = text;
+        let spanOpen = '<span className="highlight">';
+        let spanClose = '</span>';
         if (mode === 'american-to-british') {
             this.#translationList.forEach((item) => {
-                newString = newString.replace(item[0], item[1]);
+                newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
             });
         } else {
             this.#translationList.forEach((item) => {
-                newString = newString.replace(item[1], item[0]);
+                newString = newString.replace(item[1], spanOpen + item[0] + spanClose);
             });
         }
 
@@ -42,13 +44,14 @@ class Translator {
         if (times) {
             times.forEach((time) => {
                 if (mode === 'american-to-british') {
-                    newString = newString.replace(time, time.replace(':', '.'));
+                    newString = newString.replace(time, spanOpen + time.replace(':', '.') + spanClose);
                 }
                 else {
-                    newString = newString.replace(time, time.replace('.', ':'));
+                    newString = newString.replace(time, spanOpen + time.replace('.', ':') + spanClose);
                 }
             })
         }
+        console.log(newString);
         return newString;
     }
 }
