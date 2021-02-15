@@ -19,7 +19,7 @@ module.exports = function (app) {
           });
         }
 
-        if (!(req.body.locale !== "british-to-american" && req.body.locale !== "american-to-british")) {
+        if (req.body.locale !== "british-to-american" && req.body.locale !== "american-to-british") {
             return res.json({
                 error: 'Invalid value for locale field'
             });
