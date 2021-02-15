@@ -27,7 +27,7 @@ class Translator {
 
     translate(text, mode) {
         let newString = text;
-        let spanOpen = '<span className="highlight">';
+        let spanOpen = '<span class="highlight">';
         let spanClose = '</span>';
         if (mode === 'american-to-british') {
             this.#translationList.forEach((item) => {
@@ -51,7 +51,6 @@ class Translator {
                 }
             })
         }
-        console.log(newString);
         return newString;
     }
 }
