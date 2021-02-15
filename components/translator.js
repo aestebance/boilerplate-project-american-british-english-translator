@@ -5,23 +5,27 @@ const britishOnly = require('./british-only.js')
 
 class Translator {
 
-    #translationList;
+    #universalTranslationList;
+    #britishTranslationList;
+    #americanTranslationList;
     constructor() {
-        this.#translationList = [];
+        this.#universalTranslationList = [];
+        this.#americanTranslationList = [];
+        this.#britishTranslationList = [];
         Object.keys(americanOnly).forEach((key) => {
-            this.#translationList.push([key, americanOnly[key]]);
+            this.#americanTranslationList.push([key, americanOnly[key]]);
         });
 
         Object.keys(americanToBritishTitles).forEach((key) => {
-            this.#translationList.push([key, americanToBritishTitles[key]]);
+            this.#universalTranslationList.push([key, americanToBritishTitles[key]]);
         });
 
         Object.keys(americanToBritishSpelling).forEach((key) => {
-            this.#translationList.push([key, americanToBritishSpelling[key]]);
+            this.#universalTranslationList.push([key, americanToBritishSpelling[key]]);
         });
 
         Object.keys(britishOnly).forEach((key) => {
-            this.#translationList.push([britishOnly[key], key]);
+            this.#britishTranslationList.push([key, britishOnly[key]]);
         });
     }
 
@@ -30,16 +34,26 @@ class Translator {
         let spanOpen = "<span class='highlight'>";
         let spanClose = "</span>";
         if (mode === 'american-to-british') {
-            this.#translationList.forEach((item) => {
+            this.#universalTranslationList.forEach((item) => {
+                newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
+                newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
+                    spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
+            });
+            this.#americanTranslationList.forEach((item) => {
                 newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
                 newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
                     spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
             });
         } else {
-            this.#translationList.forEach((item) => {
+            this.#universalTranslationList.forEach((item) => {
                 newString = newString.replace(item[1], spanOpen + item[0] + spanClose);
                 newString = newString.replace(item[1].charAt(0).toUpperCase() + item[1].slice(1),
                     spanOpen + item[0].charAt(0).toUpperCase() + item[0].slice(1) + spanClose);
+            });
+            this.#britishTranslationList.forEach((item) => {
+                newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
+                newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
+                    spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
             });
         }
 
