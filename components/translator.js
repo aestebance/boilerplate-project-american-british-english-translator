@@ -27,7 +27,6 @@ class Translator {
 
     translate(text, mode) {
         let newString = text;
-        newString = newString.charAt(0).toUpperCase() + newString.slice(1);
         let spanOpen = "<span class='highlight'>";
         let spanClose = "</span>";
         if (mode === 'american-to-british') {
@@ -63,6 +62,7 @@ class Translator {
                 }
             })
         }
+        newString = newString.charAt(0).toUpperCase() + newString.slice(1);
         if (text === newString) {
             return 'Everything looks good to me!';
         } else {
