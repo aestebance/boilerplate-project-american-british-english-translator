@@ -32,10 +32,14 @@ class Translator {
         if (mode === 'american-to-british') {
             this.#translationList.forEach((item) => {
                 newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
+                newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
+                    spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
             });
         } else {
             this.#translationList.forEach((item) => {
                 newString = newString.replace(item[1], spanOpen + item[0] + spanClose);
+                newString = newString.replace(item[1].charAt(0).toUpperCase() + item[1].slice(1),
+                    spanOpen + item[0].charAt(0).toUpperCase() + item[0].slice(1) + spanClose);
             });
         }
 
@@ -51,7 +55,11 @@ class Translator {
                 }
             })
         }
-        return newString;
+        if (text === newString) {
+            return 'Everything looks good to me!';
+        } else {
+            return newString.charAt(0).toUpperCase() + newString.slice(1);
+        }
     }
 }
 
