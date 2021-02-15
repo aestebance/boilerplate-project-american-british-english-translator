@@ -35,25 +35,21 @@ class Translator {
         let spanClose = "</span>";
         if (mode === 'american-to-british') {
             this.#universalTranslationList.forEach((item) => {
-                newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
-                newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
-                    spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
+                const regExp = new RegExp(item[0], "ig");
+                newString = newString.replace(regExp, spanOpen + item[1] + spanClose);
             });
             this.#americanTranslationList.forEach((item) => {
-                newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
-                newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
-                    spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
+                const regExp = new RegExp(item[0], "ig");
+                newString = newString.replace(regExp, spanOpen + item[1] + spanClose);
             });
         } else {
             this.#universalTranslationList.forEach((item) => {
-                newString = newString.replace(item[1], spanOpen + item[0] + spanClose);
-                newString = newString.replace(item[1].charAt(0).toUpperCase() + item[1].slice(1),
-                    spanOpen + item[0].charAt(0).toUpperCase() + item[0].slice(1) + spanClose);
+                const regExp = new RegExp(item[1], "ig");
+                newString = newString.replace(regExp, spanOpen + item[0] + spanClose);
             });
             this.#britishTranslationList.forEach((item) => {
-                newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
-                newString = newString.replace(item[0].charAt(0).toUpperCase() + item[0].slice(1),
-                    spanOpen + item[1].charAt(0).toUpperCase() + item[1].slice(1) + spanClose);
+                const regExp = new RegExp(item[0], "ig");
+                newString = newString.replace(regExp, spanOpen + item[1] + spanClose);
             });
         }
 
