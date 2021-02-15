@@ -22,7 +22,7 @@ module.exports = function (app) {
         const {text, locale} = req.body;
 
         return res.json({
-          result: "all correct"
+          translation: "Everything looks good to me!"
         });
       });
 };
