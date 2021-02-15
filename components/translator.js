@@ -28,8 +28,8 @@ class Translator {
     translate(text, mode) {
         let newString = text;
         newString = newString.charAt(0).toUpperCase() + newString.slice(1);
-        let spanOpen = '<span class="highlight">';
-        let spanClose = '</span>';
+        let spanOpen = "<span class='highlight'>";
+        let spanClose = "</span>";
         if (mode === 'american-to-british') {
             this.#translationList.forEach((item) => {
                 newString = newString.replace(item[0], spanOpen + item[1] + spanClose);
