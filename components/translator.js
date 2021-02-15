@@ -31,7 +31,7 @@ class Translator {
 
     translate(text, mode) {
         let newString = text;
-        let spanOpen = "<span class='highlight'>";
+        let spanOpen = "<span class=\"highlight\">";
         let spanClose = "</span>";
         if (mode === 'american-to-british') {
             this.#universalTranslationList.forEach((item) => {
