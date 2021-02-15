@@ -25,9 +25,8 @@ module.exports = function (app) {
             });
         }
         const {text, locale} = req.body;
-
         return res.json({
-          translation: "Everything looks good to me!"
+          translation: translator.translate(text, locale)
         });
       });
 };
